@@ -9,7 +9,6 @@ resource "vsphere_compute_cluster" "clusters" {
   ha_enabled                    = tobool(lookup(each.value, "ha_enabled", true))
   ha_heartbeat_datastore_policy = lookup(each.value, "ha_heartbeat_datastore_policy", "allFeasibleDs")
   ha_host_monitoring            = lookup(each.value, "ha_host_monitoring", "disabled")
-  ha_vm_restart_priority        = lookup(each.value, "ha_vm_restart_priority", "disabled")
   ha_vm_component_protection    = lookup(each.value, "ha_vm_component_protection", "disabled")
   ha_advanced_options           = { "das.ignoreRedundantNetWarning" = "true" }
   name                          = each.key
