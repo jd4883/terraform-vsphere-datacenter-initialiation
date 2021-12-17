@@ -3,6 +3,7 @@ resource "vsphere_datacenter" "dc" { name = var.datacenter_name }
 resource "vsphere_compute_cluster" "clusters" {
   for_each                      = var.clusters
   datacenter_id                 = vsphere_datacenter.dc.moid
+  drs_advanced_options          = lookup(each.value, "drs_advanced_options", {})
   drs_automation_level          = lookup(each.value, "drs_automation_level", "fullyAutomated")
   drs_enabled                   = tobool(lookup(each.value, "drs_enabled", true))
   ha_admission_control_policy   = lookup(each.value, "ha_admission_control_policy", "disabled")
